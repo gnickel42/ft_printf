@@ -1,14 +1,15 @@
-NAME	= ft_printf.a
+NAME	= libftprintf.a
 
-OBJ_DIR = obj/
+OBJ_DIR = obj
 SRC_DIR = src/
 HEADER	= include/ft_printf.h
 
-SRC		= $(SRC_DIR)ft_printf.c
+SRC		= src/ft_printf.c src/ft_charstr.c
 
-CFLAGS	= -Wall -Werror -Wextra
+CFLAGS	= -Wall -Werror -Wextra -I include
 CC		= cc
-OBJ		= $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
+OBJ		= $(SRC:.c=.o)
+OBJ		:= $(patsubst $(SRC_DIR)/%.o, $(OBJ_DIR)/%.o, $(OBJ))
 
 .PHONY: all clean fclean re
 
@@ -17,11 +18,11 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	ar -rcs $(NAME) $(OBJ)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)%.c $(HEADER) | $(OBJ_DIR)
-	$(CC) $(CFLAGS) -I include -c $< -o $@
-
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
+
+$(OBJ_DIR)/%.o: %.c $(HEADER) | $(OBJ_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -rf $(OBJ_DIR)

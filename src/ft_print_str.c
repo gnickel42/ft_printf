@@ -20,6 +20,10 @@ int	ft_print_str(char *str)
 		str = "(null)";
 	i = 0;
 	while (str[i])
+	{
 		i += write(1, &str[i], 1);
+		if (i == -1)
+			return (-1);
+	}
 	return (i);
 }

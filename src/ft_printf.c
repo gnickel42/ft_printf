@@ -33,6 +33,8 @@ int	ft_print_format(char format, va_list args)
 		len += ft_print_ptr(va_arg(args, void *));
 	else if (format == '%')
 		len += (ft_print_char('%'));
+	else
+		return (-1);
 	return (len);
 }
 
@@ -41,6 +43,7 @@ int	ft_printf(const char *format, ...)
 	va_list	args;
 	int		len;
 	int		i;
+	int		res;
 
 	i = 0;
 	len = 0;
@@ -48,12 +51,12 @@ int	ft_printf(const char *format, ...)
 	while (format[i])
 	{
 		if (format[i] == '%')
-		{
-			i++;
-			len += ft_print_format(format[i], args);
-		}
+			res = ft_print_format(format[++i], args);
 		else
-			len += ft_print_char(format[i]);
+			res = ft_print_char(format[i]);
+		if (res == -1)
+			return (va_end(args), -1);
+		len += res;
 		i++;
 	}
 	va_end(args);

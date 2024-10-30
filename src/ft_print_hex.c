@@ -19,7 +19,11 @@ int	ft_print_hex(unsigned long n, bool upper)
 
 	len = 0;
 	if (n >= 16)
+	{
 		len += ft_print_hex(n / 16, upper);
+		if (len == -1)
+			return (-1);
+	}
 	if ((n % 16) < 10)
 		hex_digit = (n % 16) + '0';
 	else
@@ -30,5 +34,7 @@ int	ft_print_hex(unsigned long n, bool upper)
 			hex_digit = (n % 16) - 10 + 'a';
 	}
 	len += ft_print_char(hex_digit);
+	if (len == -1)
+		return (-1);
 	return (len);
 }

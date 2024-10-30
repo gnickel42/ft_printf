@@ -20,6 +20,10 @@ int	ft_print_ptr(void *ptr)
 	if (!ptr)
 		return (ft_print_str("0x0"));
 	len = ft_print_str("0x");
+	if (len == -1)
+		return (-1);
 	len += ft_print_hex((unsigned long)ptr, false);
+	if (len == -1)
+		return (-1);
 	return (len);
 }

@@ -22,10 +22,18 @@ int	ft_print_int(int n)
 	if (n < 0)
 	{
 		len += ft_print_char('-');
+		if (len == -1)
+			return (-1);
 		n = -n;
 	}
 	if (n >= 10)
+	{
 		len += ft_print_int(n / 10);
+		if (len == -1)
+			return (-1);
+	}
 	len += ft_print_char((n % 10) + '0');
+	if (len == -1)
+		return (-1);
 	return (len);
 }

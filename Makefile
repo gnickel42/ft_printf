@@ -4,7 +4,9 @@ OBJ_DIR = obj
 SRC_DIR = src/
 HEADER	= include/ft_printf.h
 
-SRC		= src/ft_printf.c src/ft_charstr.c
+SRC		= src/ft_printf.c src/ft_print_char.c src/ft_print_str.c\
+		  src/ft_print_int.c src/ft_print_unsigned.c src/ft_print_hex.c\
+		  src/ft_print_ptr.c
 
 CFLAGS	= -Wall -Werror -Wextra -I include
 CC		= cc

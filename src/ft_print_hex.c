@@ -1,29 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_print_hex.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gnickel <gnickel@student.42heilbronn.de>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/28 13:22:00 by gnickel           #+#    #+#             */
-/*   Updated: 2024/10/29 09:35:17 by gnickel          ###   ########.fr       */
+/*   Created: 2024/10/30 11:15:40 by gnickel           #+#    #+#             */
+/*   Updated: 2024/10/30 11:15:40 by gnickel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "ft_printf.h"
 
-# include <stdbool.h>
-# include "unistd.h"
-# include "stdarg.h"
+int	ft_print_hex(unsigned long n, bool upper)
+{
+	int		len;
+	char	hex_digit;
 
-int	ft_printf(const char *format, ...);
-int	ft_print_char(char c);
-int	ft_print_str(char *str);
-int	ft_print_int(int i);
-int	ft_print_unsigned(unsigned int i);
-int	ft_print_hex(unsigned long i, bool upper);
-int	ft_print_ptr(void *p);
-int	ft_print_percent(const void *p);
-
-#endif
+	len = 0;
+	if (n >= 16)
+		len += ft_print_hex(n / 16, upper);
+	if ((n % 16) < 10)
+		hex_digit = (n % 16) + '0';
+	else
+	{
+		if (upper)
+			hex_digit = (n % 16) - 10 + 'A';
+		else
+			hex_digit = (n % 16) - 10 + 'a';
+	}
+	len += ft_print_char(hex_digit);
+	return (len);
+}

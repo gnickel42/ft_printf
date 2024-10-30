@@ -18,7 +18,13 @@ int	ft_print_unsigned(unsigned int n)
 
 	len = 0;
 	if (n >= 10)
+	{
 		len += ft_print_int(n / 10);
+		if (len == -1)
+			return (-1);
+	}
 	len += ft_print_char((n % 10) + '0');
+	if (len == -1)
+		return (-1);
 	return (len);
 }
